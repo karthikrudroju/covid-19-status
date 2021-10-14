@@ -9,11 +9,11 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/", function(req,res){
-    axios.get("https://api.covid19api.com/summary")
+    axios.get("https://corona.lmao.ninja/v2/all?yesterday")
     .then((response) => {
-        const totalConfirmed = response.data.Global.TotalConfirmed;
-        const totalDeaths = response.data.Global.TotalDeaths;
-        const totalRecovered = response.data.Global.TotalRecovered;
+        const totalConfirmed = response.data.cases;
+        const totalDeaths = response.data.deaths;
+        const totalRecovered = response.data.recovered;
         res.render("index", {tConfirmed: totalConfirmed, tDeaths: totalDeaths, tRecovered: totalRecovered});
     })
     .catch((err) => {
